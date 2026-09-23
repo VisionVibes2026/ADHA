@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-adha-bg text-adha-text font-sans antialiased text-[13px] leading-normal selection:bg-adha-navy/15 selection:text-adha-navy;
+  }
+  
+  h1, h2, h3, h4 {
+    @apply tracking-tight;
+  }
+}
+
+@layer components {
+  /* Buttons — no shadows, sharp radii */
+  .antd-btn-primary {
+    @apply bg-adha-navy hover:bg-adha-navy-dark text-white font-semibold px-3 py-1.5 rounded-xs border border-adha-navy transition-colors duration-150 inline-flex items-center justify-center gap-1.5 text-xs select-none;
+  }
+
+  .antd-btn-default {
+    @apply bg-white hover:bg-slate-50 text-slate-700 font-semibold px-3 py-1.5 rounded-xs border border-slate-300 transition-colors duration-150 inline-flex items-center justify-center gap-1.5 text-xs select-none;
+  }
+
+  .antd-btn-dashed {
+    @apply bg-white hover:bg-slate-50 text-slate-700 font-semibold px-3 py-1.5 rounded-xs border border-dashed border-slate-400 transition-colors duration-150 inline-flex items-center justify-center gap-1.5 text-xs select-none;
+  }
+
+  .antd-btn-teal {
+    @apply bg-adha-teal hover:bg-adha-teal-light text-white font-semibold px-3 py-1.5 rounded-xs border border-adha-teal transition-colors duration-150 inline-flex items-center justify-center gap-1.5 text-xs select-none;
+  }
+
+  /* Tags & Badges */
+  .antd-tag {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-xs text-[11px] font-mono font-medium border border-slate-200 bg-slate-100 text-slate-700 select-none;
+  }
+
+  .antd-tag-green {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-xs text-[11px] font-mono font-semibold border border-emerald-300 bg-emerald-50 text-emerald-800 select-none;
+  }
+
+  .antd-tag-blue {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-xs text-[11px] font-mono font-semibold border border-blue-300 bg-blue-50 text-blue-800 select-none;
+  }
+
+  .antd-tag-orange {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-xs text-[11px] font-mono font-semibold border border-amber-300 bg-amber-50 text-amber-900 select-none;
+  }
+
+  .antd-tag-red {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-xs text-[11px] font-mono font-semibold border border-red-300 bg-red-50 text-red-800 select-none;
+  }
+
+  .antd-tag-navy {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-xs text-[11px] font-mono font-semibold border border-adha-navy/40 bg-adha-navy/10 text-adha-navy select-none;
+  }
+
+  /* Cards — border only, no shadow */
+  .antd-card {
+    @apply bg-white border border-slate-200 rounded-xs p-5;
+  }
+
+  .antd-card-head {
+    @apply border-b border-slate-100 pb-3 mb-4 flex items-center justify-between;
+  }
+}
+
+/* Custom Scrollbar for dense institutional UI */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1F5F9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Archival Scan Canvas Effect */
+.archival-scan-bg {
+  background-color: #EFEBE4;
+  background-image: radial-gradient(#D3CBBF 1px, transparent 0);
+  background-size: 16px 16px;
+}
+
+.high-contrast-mode {
+  filter: contrast(160%) brightness(95%) grayscale(20%);
+}
+
+.uv-ir-mode {
+  filter: invert(90%) hue-rotate(180deg) contrast(140%);
+}
