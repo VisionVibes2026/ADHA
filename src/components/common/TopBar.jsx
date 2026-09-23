@@ -1,15 +1,17 @@
 import React from 'react';
 import { Search, ChevronDown, Globe, Bell, UserCheck, Landmark } from 'lucide-react';
 import { useArchive } from '../../context/ArchiveContext';
+import logoImg from '../../assets/logo.png';
 
 export default function TopBar() {
   const { selectedRepository, setSelectedRepository, selectedLanguage, setSelectedLanguage, searchQuery, setSearchQuery } = useArchive();
 
   return (
-    <header className="h-[56px] min-h-[56px] bg-white border-b border-adha-border px-6 flex items-center justify-between sticky top-0 z-30">
-      {/* Brand & Search Input */}
+    <header className="h-[56px] min-h-[56px] bg-white border-b border-adha-border px-6 flex items-center justify-between sticky top-0 z-30 font-sans">
+      {/* Brand Logo & Search Input */}
       <div className="flex items-center gap-4">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
+          <img src={logoImg} alt="ADHA Logo" className="h-9 w-auto object-contain" />
           <div className="flex flex-col">
             <div className="flex items-center gap-1.5">
               <span className="font-serif font-bold text-adha-navy text-base leading-none tracking-tight">ADHA</span>
@@ -17,7 +19,7 @@ export default function TopBar() {
                 GOV.IN
               </span>
             </div>
-            <span className="text-[9.5px] font-mono tracking-wider text-adha-muted uppercase">
+            <span className="text-[9.5px] font-mono tracking-wider text-slate-500 uppercase">
               NATIONAL ARCHIVAL REPOSITORY
             </span>
           </div>
@@ -77,9 +79,7 @@ export default function TopBar() {
 
         {/* User Profile */}
         <div className="flex items-center gap-2 pl-2 border-l border-slate-200">
-          <div className="w-7 h-7 rounded-xs bg-adha-navy text-white font-bold text-[10px] flex items-center justify-center font-serif border border-adha-navy/40">
-            DHA
-          </div>
+          <img src={logoImg} alt="Avatar" className="w-7 h-7 rounded-xs object-cover border border-slate-200" />
           <div className="hidden lg:block leading-tight">
             <p className="text-[11px] font-semibold text-slate-800">PROF. R. B. AMBEDKAR</p>
             <p className="text-[10px] text-emerald-700 font-medium flex items-center gap-1">

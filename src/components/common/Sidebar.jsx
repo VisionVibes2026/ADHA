@@ -11,7 +11,7 @@ import {
   FolderKanban, 
   Info as InfoIcon
 } from 'lucide-react';
-import { useArchive } from '../../context/ArchiveContext';
+import logoImg from '../../assets/logo.png';
 
 export default function Sidebar() {
   const location = useLocation();
@@ -31,12 +31,13 @@ export default function Sidebar() {
   return (
     <aside className="w-[250px] min-w-[250px] bg-[#12243E] text-white flex flex-col justify-between h-screen sticky top-0 left-0 z-40 border-r border-[#0D1B30] select-none font-sans">
       <div>
-        {/* Sidebar Brand Header */}
-        <div className="p-5 border-b border-white/10 flex items-center gap-3">
-          {/* Emblem Icon */}
-          <div className="w-10 h-10 rounded-full border border-amber-300/40 bg-slate-900/60 flex items-center justify-center text-amber-300 font-serif font-bold text-lg shadow-sm">
-            ⚜
-          </div>
+        {/* Sidebar Brand Header with Official Logo */}
+        <div className="p-4 border-b border-white/10 flex items-center gap-3 bg-[#0D1B30]/40">
+          <img 
+            src={logoImg} 
+            alt="ADHA Official Logo" 
+            className="w-11 h-11 object-contain drop-shadow-sm bg-white/90 p-1 rounded-sm" 
+          />
           <div>
             <h1 className="font-serif font-bold text-base tracking-tight text-white leading-tight">
               ADHA
@@ -58,7 +59,7 @@ export default function Sidebar() {
                 to={item.path}
                 className={`flex items-center gap-3 px-3.5 py-2.5 rounded-sm transition-all text-[13px] ${
                   isActive 
-                    ? 'bg-[#1C365C] text-white font-semibold shadow-xs' 
+                    ? 'bg-[#1C365C] text-white font-semibold shadow-xs border-l-3 border-amber-400 pl-3' 
                     : 'text-slate-300 hover:bg-white/5 hover:text-white font-normal'
                 }`}
               >
