@@ -211,8 +211,130 @@ export const ARCHIVE_RECORDS = [
     year: '1956',
     category: 'Writings & Speeches',
     sha256: 'e5f67890123456789abcdef0123456789abcdef0123456789abcdef012345678'
+  },
+  {
+    id: 'ADHA-MSS-1915-BUD',
+    legacyId: 'ADHA-MSS-BUD-REV',
+    title: "Notes on 'The Good Law' by Anagarika Dharmapala (Handwritten Research Folio)",
+    subtitle: "Original handwritten archival page by Dr. B.R. Ambedkar from 'The Buddhist Review' (Vol. VII, No. 2)",
+    type: 'Handwritten Manuscript Folio',
+    medium: 'Ink on Vintage Laid Paper Leaf',
+    date: 'c. 1915–1916',
+    location: 'London / Bombay Research Collection',
+    language: 'English',
+    script: 'Original Cursive Handwriting (Ambedkar Autograph)',
+    institution: 'Maharashtra State Archives / Dr. Ambedkar Research Institute',
+    source: 'Dr. Ambedkar Personal Research Papers — Rare Manuscripts Division',
+    rights: 'National Heritage Document — Open Scholarly Access',
+    verification: 'Archival Master',
+    verificationState: 'Verified',
+    verified: true,
+    year: '1915',
+    category: 'Legal Manuscripts',
+    sha256: '9c8b7a6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b',
+    hasRealHandwritingScan: true,
+    thumbnailUrl: '/ambedkar-handwritten-dharmapala.jpg'
   }
 ];
+
+export const HANDWRITTEN_PAGE_DATA = {
+  pageNum: 99,
+  sectionType: 'handwritten',
+  imageUrl: '/ambedkar-handwritten-dharmapala.jpg',
+  header: 'ARCHIVAL MANUSCRIPT FOLIO • AUTOGRAPH HANDWRITING',
+  title: "Notes on 'The Good Law' by Anagarika Dharmapala",
+  subtitle: "Handwritten Research Notes by Dr. B. R. Ambedkar (The Buddhist Review, Vol. VII, No. 2)",
+  extraHeader: 'ACCESSION CODE: ADHA-MSS-1915-BUD • LEAF 1 OF 1 (RECTO)',
+  scanBg: 'bg-[#F2ECE1]',
+  scanStyle: 'handwritten-vintage',
+  quoteCallout: '“This is an original handwritten archival page. Old handwritten documents are difficult to search directly.”',
+  
+  diplomaticLines: [
+    { num: 1, text: "The Buddhist Review. Vol VII. No. 2.", confidence: "98.4%", note: "Journal title & volume reference" },
+    { num: 2, text: "'Notes ~by~ on The Good Law' by Anagarik Dharmapala", confidence: "95.8%", note: "Author strike-through of 'by' corrected to 'on'" },
+    { num: 3, text: "'The Disciples of the Buddha refrains from", confidence: "97.1%", note: "Archaic agreement 'refrains' verbatim as in manuscript" },
+    { num: 4, text: "indulging in speculations as to whence, ^whither^", confidence: "94.6%", note: "Superscript insertion of 'whither' above line" },
+    { num: 5, text: "and what am I.", confidence: "98.9%", note: "Core Buddhist refusal of vain metaphysical speculation" },
+    { num: 6, text: "2. He discards heresies about the soul and refrains", confidence: "97.8%", note: "Anatta doctrine — rejection of eternal soul (Atman)" },
+    { num: 7, text: "from identifying it with either the ~soul~ body,", confidence: "95.2%", note: "Slip-of-the-pen 'soul' struck through, replaced with 'body'" },
+    { num: 8, text: "sensations, perceptions, volitions and consciousness.", confidence: "98.5%", note: "The 5 Skandhas (Rupa, Vedana, Sanna, Sankhara, Vinnana)" },
+    { num: 9, text: "3. He discards all Nihilistic views which are", confidence: "96.9%", note: "Rejection of Ucchedavada (annihilationist nihilism)" },
+    { num: 10, text: "held [by] certain religious teachers. He contemns such", confidence: "94.8%", note: "Handwritten 'contemns' / 'contempts' — strong moral repudiation" },
+    { num: 11, text: "views as are held by heretics.", confidence: "97.3%", note: "Orthodox Middle Path against extreme heresy" },
+    { num: 12, text: "4. He disregards the theory that the cosmic progress", confidence: "98.2%", note: "Pratityasamutpada — dependent origination without beginning" },
+    { num: 13, text: "has a known beginning.", confidence: "99.1%", note: "Rejection of prime mover / absolute temporal commencement" },
+    { num: 14, text: "5. He repudiates the theory that a God created man", confidence: "98.7%", note: "Rationalist critique of theological creationism" },
+    { num: 15, text: "                                                    T.O.", confidence: "99.4%", note: "Archival foliation marker: Turn Over" }
+  ],
+
+  normalizedText: `The Buddhist Review. Vol VII. No. 2.
+'Notes on The Good Law' by Anagarika Dharmapala
+
+1. The disciple of the Buddha refrains from indulging in speculations as to whence, whither and what am I.
+2. He discards heresies about the soul and refrains from identifying it with either the body, sensations, perceptions, volitions and consciousness.
+3. He discards all Nihilistic views which are held by certain religious teachers. He contemns such views as are held by heretics.
+4. He disregards the theory that the cosmic progress has a known beginning.
+5. He repudiates the theory that a God created man.
+[T.O. — Turn Over]`,
+
+  transcription: {
+    layer: 'Layer: Autograph Cursive Manuscript (Ambedkar)',
+    engine: 'ADHA Neural DeepHTR v5.2 (Transformer Vision)',
+    confidence: '96.8%',
+    header: 'NEURAL HANDWRITING RECOGNITION (HTR) ENGINE TRANSCRIPTION',
+    chapter: 'AUTOGRAPH RESEARCH FOLIO',
+    sectionTitle: 'Notes on The Good Law (Anagarika Dharmapala)',
+    clause1: {
+      title: '[Original Archival Source & Review]',
+      body: "Ambedkar's autograph reading notes from The Buddhist Review (Vol. VII, No. 2, 1915), examining Anagarika Dharmapala's treatise 'Notes on The Good Law'. These notes show Dr. Ambedkar's systematic early philosophical engagement with foundational Buddhist metaphysics."
+    },
+    clause2: {
+      title: '[5 Core Philosophical Propositions Transcribed]',
+      body: "1. Agnosticism toward speculative metaphysics ('whence, whither, what am I'); 2. Rigorous Anatta doctrine rejecting a permanent soul and analyzing identity across the five aggregates (body, sensations, perceptions, volitions, consciousness); 3. Rejection of nihilism and moral determinism; 4. Rejection of cosmic teleology or first cause; 5. Explicit repudiation of creationist theism."
+    },
+    doctrinalFramework: {
+      badge: 'Philosophical Lineage',
+      title: 'Significance to "The Buddha and His Dhamma" (1956)',
+      quote: '"These handwritten notes demonstrate that decades before the 1956 Deekshabhoomi conversion, Dr. Ambedkar was rigorously reconstructing Buddhism as a rational, anti-metaphysical, and emancipatory philosophy."',
+      citation: '— Archival Curatorial Board & Research Division'
+    },
+    footnotes: [
+      { num: '1', title: 'Anagarika Dharmapala (1864–1933):', text: 'Pioneer Sri Lankan Buddhist revivalist, founder of the Maha Bodhi Society, and close international interlocutor of early anti-caste Buddhist resurgence.' },
+      { num: '2', title: 'Five Aggregates (Pancha-Skandha):', text: 'Ambedkar explicitly lists the five aggregates: body (rupa), sensations (vedana), perceptions (sanna), volitions (sankhara), and consciousness (vinnana).' },
+      { num: '3', title: 'Diplomatic Note on Strikethroughs:', text: 'Line 2 shows correction of \'by\' to \'on\'; Line 7 shows the word \'soul\' crossed out before \'body\', illustrating Ambedkar\'s precise analytical thinking as he penned the draft.' }
+    ]
+  }
+};
+
+export const HANDWRITTEN_DOC_DATA = {
+  id: 'ADHA-MSS-1915-BUD',
+  accessionNumber: 'ADHA-MSS-1915-BUD',
+  title: "Notes on 'The Good Law' by Anagarika Dharmapala (Handwritten Research Folio)",
+  shortTitle: "Ambedkar Handwritten Folio (1915)",
+  curatorSignoff: 'DR. K. G. RAMARAO / PROF. S. THORAT',
+  curatorialNote: 'Original handwritten archival page by Dr. B.R. Ambedkar containing study notes on Anagarika Dharmapala\'s article in The Buddhist Review (Vol. VII, No. 2). Digitized with High-Throughput Neural Handwriting Recognition (HTR).',
+  
+  metadata: {
+    formalTitle: "Notes on 'The Good Law' by Anagarika Dharmapala — Autograph Handwritten Folio",
+    author: 'Dr. Bhimrao Ramji Ambedkar, M.A., Ph.D.',
+    dateOfImprint: 'c. 1915–1916 (Archival Period Estimate)',
+    extentFormat: '1 Leaf (Recto), Octavo, Iron Gall / Cursive Ink on Laid Paper',
+    language: 'English (with Buddhist Philosophical Taxonomy)',
+    publisherPress: 'Unpublished Research Manuscript / Maharashtra State Archives Special Collection',
+    source: 'Dr. Ambedkar Personal Research Papers — Rare Manuscripts Division',
+    rights: 'National Heritage Document — Open Scholarly Access',
+    preservationSpec: '1200 DPI TIFF Raw Master • Deep Optical HTR v5.2 • Conservation Vault MSA-AMB-1915',
+    cryptographicChecksum: 'SHA-256: 9c8b7a6d5e4f3a2b1c0d9e8f7a6b5c4d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b'
+  },
+
+  pagesList: [
+    { pageNum: 99, label: 'HTR Folio ★', title: 'Handwritten Manuscript: The Buddhist Review (Ambedkar Autograph)' }
+  ],
+
+  pagesData: {
+    99: HANDWRITTEN_PAGE_DATA
+  }
+};
 
 export const DOCUMENT_DETAIL_DATA = {
   id: 'ADHA-DOC-001',
@@ -236,6 +358,7 @@ export const DOCUMENT_DETAIL_DATA = {
   },
 
   pagesList: [
+    { pageNum: 99, label: 'HTR Folio ★', title: 'Real Handwritten Page: The Buddhist Review (Ambedkar Autograph)' },
     { pageNum: 1, label: 'Cover', title: 'Book Cover Art' },
     { pageNum: 4, label: 'p. 4 ★', title: '1936 Title Page Facsimile' },
     { pageNum: 8, label: 'p. 8', title: 'Table of Contents' },
@@ -252,6 +375,7 @@ export const DOCUMENT_DETAIL_DATA = {
   ],
 
   pagesData: {
+    99: HANDWRITTEN_PAGE_DATA,
     1: {
       pageNum: 1,
       sectionType: 'cover',

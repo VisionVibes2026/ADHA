@@ -1,149 +1,224 @@
 import React, { useState } from 'react';
-import { Database, ShieldCheck, CheckCircle2, RefreshCw, HardDrive, FileCheck, Clock } from 'lucide-react';
+import { 
+  Database, 
+  ShieldCheck, 
+  CheckCircle2, 
+  RefreshCw, 
+  HardDrive, 
+  FileCheck, 
+  Clock, 
+  Server, 
+  Activity, 
+  Download, 
+  AlertTriangle,
+  Terminal,
+  Layers,
+  Cpu
+} from 'lucide-react';
 
 export default function PreservationView() {
   const [scrubbing, setScrubbing] = useState(false);
-  const [logMessage, setLogMessage] = useState(null);
+  const [activeLog, setActiveLog] = useState([]);
+  const [selectedTier, setSelectedTier] = useState('all');
+
+  const initialLogs = [
+    { time: '15:02:18', hash: '9e107d9d372bb6826bd81d3542a419d6dae10d32', status: 'VALID', block: 'BLK-049182', file: 'MS-1936-AOC-Folio-12.tiff' },
+    { time: '14:45:01', hash: '8f43c114ae3901b8e43810f2c418290310214a11', status: 'VALID', block: 'BLK-049181', file: 'CAD-1946-DEC-Speech-Draft.pdf' },
+    { time: '14:30:22', hash: '3e19a419082bc01481f9a2e38c11928014820a44', status: 'VALID', block: 'BLK-049180', file: 'COL-1916-Castes-India-Print.tiff' },
+    { time: '14:15:10', hash: '7c40a182901c238b14a9018e47c19401b81923aa', status: 'VALID', block: 'BLK-049179', file: 'PHOTO-1931-London-RTC-Delegation.raw' },
+  ];
+
+  const [logs, setLogs] = useState(initialLogs);
 
   const handleRunScrubbing = () => {
     setScrubbing(true);
-    setLogMessage('Initiating integrity scrub across storage tiers...');
+    const newLogs = [
+      { time: 'Just now', hash: '0a81f9024c180918b41728c0193481a8b1938a19', status: 'VERIFYING', block: 'BLK-049183', file: 'RTC-1932-Minorities-Memo.tiff' },
+      ...logs
+    ];
+    setLogs(newLogs);
+
     setTimeout(() => {
+      setLogs(prev => prev.map(l => l.block === 'BLK-049183' ? { ...l, status: 'VALID' } : l));
       setScrubbing(false);
-      setLogMessage('✓ Preservation scrub complete — all records verified against SHA-256 tree. 0 errors.');
-    }, 1800);
+    }, 2000);
   };
 
   return (
-    <div className="space-y-5 pb-12">
-      <div className="border-b border-slate-200 pb-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="space-y-6 pb-12 font-sans">
+      
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-200 dark:border-[#23324E]">
         <div>
-          <h1 className="text-2xl font-serif font-bold text-adha-navy tracking-tight">Digital Preservation Health</h1>
-          <p className="text-xs text-slate-600 mt-1">
-            Bitstream integrity monitors, geographic mirror logs, and cryptographic hash verification.
+          <div className="flex items-center gap-2">
+            <h1 className="text-2xl font-serif font-bold text-slate-900 dark:text-white tracking-tight">
+              ISO 14721 OAIS Digital Preservation Health
+            </h1>
+            <span className="badge-success font-mono text-[11px]">
+              Merkle Root Anchored
+            </span>
+          </div>
+          <p className="text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-3xl leading-relaxed">
+            Continuous bitstream integrity monitoring, fixity scrubbing, and multi-tier geo-replicated preservation vaults.
           </p>
         </div>
+
         <button 
           onClick={handleRunScrubbing}
           disabled={scrubbing}
-          className="antd-btn-primary disabled:opacity-50"
+          className="px-4 py-2.5 rounded-xl bg-[#123B63] hover:bg-[#0e2f50] text-white text-xs font-semibold flex items-center gap-2 transition-all cursor-pointer shadow-sm disabled:opacity-50"
         >
           <RefreshCw className={`w-3.5 h-3.5 ${scrubbing ? 'animate-spin' : ''}`} />
-          <span>{scrubbing ? 'Scrubbing...' : 'Run Integrity Scrub'}</span>
+          <span>{scrubbing ? 'Recalculating Merkle Hash...' : 'Trigger Parity Scrub'}</span>
         </button>
       </div>
 
-      {logMessage && (
-        <div className="bg-slate-900 text-emerald-400 font-mono text-xs p-3 rounded-xs border border-slate-700 flex justify-between items-center">
-          <span>{logMessage}</span>
-          <button onClick={() => setLogMessage(null)} className="text-slate-400 hover:text-white font-bold ml-3">✕</button>
+      {/* Storage Architecture Metrics (3 Tiers) */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        
+        {/* Tier 1 */}
+        <div className="saas-card p-5 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              Hot Cache Tier
+            </span>
+            <span className="badge-primary">NVMe Flash</span>
+          </div>
+          <div>
+            <p className="text-2xl font-bold font-mono text-slate-900 dark:text-white">5.2 TB / 10 TB</p>
+            <div className="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full mt-2 overflow-hidden">
+              <div className="bg-blue-600 h-full rounded-full" style={{ width: '52%' }} />
+            </div>
+          </div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-between pt-1">
+            <span>Latency: 0.8ms</span>
+            <span>IIIF Deep Zoom & Vector Cache</span>
+          </div>
         </div>
-      )}
 
-      {/* Storage, Integrity, Checksum — compact table */}
-      <div className="bg-white border border-slate-200 rounded-xs overflow-hidden">
-        <div className="px-5 py-3 border-b border-slate-100">
-          <h2 className="text-base font-serif font-bold text-adha-navy">Storage & Integrity Status</h2>
+        {/* Tier 2 */}
+        <div className="saas-card p-5 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              Nearline Master AIP
+            </span>
+            <span className="badge-teal">Ceph Object</span>
+          </div>
+          <div>
+            <p className="text-2xl font-bold font-mono text-slate-900 dark:text-white">36.0 TB / 80 TB</p>
+            <div className="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full mt-2 overflow-hidden">
+              <div className="bg-teal-600 h-full rounded-full" style={{ width: '45%' }} />
+            </div>
+          </div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-between pt-1">
+            <span>Triple Geo-Replicated</span>
+            <span>Uncompressed 1200 DPI TIFFs</span>
+          </div>
         </div>
-        <table className="w-full text-left text-xs border-collapse">
-          <thead>
-            <tr className="bg-slate-50 border-b border-slate-200 text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">
-              <th className="p-3 font-semibold">PARAMETER</th>
-              <th className="p-3 font-semibold">VALUE</th>
-              <th className="p-3 font-semibold">STATUS</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100 font-mono">
-            <tr>
-              <td className="p-3 text-slate-700">Bitstream Capacity</td>
-              <td className="p-3 font-bold text-slate-900">41.2 TB / 80 TB (51.5%)</td>
-              <td className="p-3"><span className="antd-tag-green">Operational</span></td>
-            </tr>
-            <tr>
-              <td className="p-3 text-slate-700">Geographic Mirrors</td>
-              <td className="p-3 font-bold text-slate-900">4 active mirrors</td>
-              <td className="p-3"><span className="antd-tag-green">Synchronized</span></td>
-            </tr>
-            <tr>
-              <td className="p-3 text-slate-700">Integrity Scrub</td>
-              <td className="p-3 font-bold text-slate-900">Last completed: Today at 03:00 IST</td>
-              <td className="p-3"><span className="antd-tag-green">100% Pass</span></td>
-            </tr>
-            <tr>
-              <td className="p-3 text-slate-700">Corrupted Blocks</td>
-              <td className="p-3 font-bold text-emerald-700">0 detected</td>
-              <td className="p-3"><span className="antd-tag-green">Clean</span></td>
-            </tr>
-            <tr>
-              <td className="p-3 text-slate-700">Cryptographic Hash Algorithm</td>
-              <td className="p-3 font-bold text-slate-900">SHA-256</td>
-              <td className="p-3"><span className="antd-tag-green">Verified</span></td>
-            </tr>
-            <tr>
-              <td className="p-3 text-slate-700">Offsite Tape Mirror</td>
-              <td className="p-3 font-bold text-slate-900">Dr. Ambedkar National Memorial Vault</td>
-              <td className="p-3"><span className="antd-tag-green">Completed</span></td>
-            </tr>
-          </tbody>
-        </table>
+
+        {/* Tier 3 */}
+        <div className="saas-card p-5 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+              Cold Airgap Vault
+            </span>
+            <span className="badge-success">LTO-9 Tape</span>
+          </div>
+          <div>
+            <p className="text-2xl font-bold font-mono text-slate-900 dark:text-white">120.0 TB WORM</p>
+            <div className="w-full bg-slate-100 dark:bg-slate-800 h-2 rounded-full mt-2 overflow-hidden">
+              <div className="bg-emerald-600 h-full rounded-full" style={{ width: '100%' }} />
+            </div>
+          </div>
+          <div className="text-[11px] text-slate-500 dark:text-slate-400 flex items-center justify-between pt-1">
+            <span>Air-gapped Bunker</span>
+            <span>50-Year Magnetic Retention</span>
+          </div>
+        </div>
+
       </div>
 
-      {/* Version History */}
-      <div className="bg-white border border-slate-200 rounded-xs overflow-hidden">
-        <div className="px-5 py-3 border-b border-slate-100">
-          <h2 className="text-base font-serif font-bold text-adha-navy">Version History</h2>
+      {/* Geographic Replication Nodes Grid */}
+      <div className="saas-card p-6 space-y-4">
+        <h3 className="font-serif font-bold text-base text-slate-900 dark:text-white border-b border-slate-100 dark:border-slate-800 pb-3 flex items-center justify-between">
+          <span>Active Geographic Archival Mirrors</span>
+          <span className="text-xs font-mono text-emerald-600 dark:text-emerald-400 font-normal">
+            4 / 4 Nodes Synchronous
+          </span>
+        </h3>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {[
+            { city: 'New Delhi Primary', facility: 'NIC National Datacenter', ping: '12ms', sync: '0s (Master)', status: 'Master' },
+            { city: 'Pune Disaster Recovery', facility: 'C-DAC High Performance Lab', ping: '26ms', sync: '0.4s lag', status: 'Replica' },
+            { city: 'Hyderabad Vault', facility: 'Airgapped Disaster Recovery Site', ping: '31ms', sync: '1m lag', status: 'Replica' },
+            { city: 'Columbia Univ Collaborative', facility: 'Rare Book & Manuscript Library', ping: '142ms', sync: 'Hourly OAI', status: 'Federated' },
+          ].map((node, i) => (
+            <div key={i} className="p-4 rounded-xl bg-slate-50 dark:bg-[#0E1726] border border-slate-200 dark:border-[#23324E] space-y-2">
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-slate-900 dark:text-white text-xs">{node.city}</span>
+                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              </div>
+              <p className="text-[11px] text-slate-500 dark:text-slate-400">{node.facility}</p>
+              <div className="pt-2 border-t border-slate-200 dark:border-slate-800 flex justify-between text-[10px] font-mono text-slate-600 dark:text-slate-400">
+                <span>RTT: {node.ping}</span>
+                <span className="font-semibold text-emerald-600 dark:text-emerald-400">{node.status}</span>
+              </div>
+            </div>
+          ))}
         </div>
-        <table className="w-full text-left text-xs border-collapse">
-          <thead>
-            <tr className="bg-slate-50 border-b border-slate-200 text-[10.5px] font-mono text-slate-500 uppercase tracking-wider">
-              <th className="p-3 font-semibold">VERSION</th>
-              <th className="p-3 font-semibold">DATE</th>
-              <th className="p-3 font-semibold">CHANGE</th>
-              <th className="p-3 font-semibold text-right">AUTHOR</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100 font-mono">
-            <tr><td className="p-3">v5.2</td><td className="p-3">2024-11-22</td><td className="p-3 font-sans">Updated HTR transcription engine to Tesseract v5.2</td><td className="p-3 text-right">System</td></tr>
-            <tr><td className="p-3">v5.1</td><td className="p-3">2024-10-15</td><td className="p-3 font-sans">Added Columbia University federated node sync</td><td className="p-3 text-right">Admin</td></tr>
-            <tr><td className="p-3">v5.0</td><td className="p-3">2024-09-01</td><td className="p-3 font-sans">Major schema migration — Dublin Core & MARC21 compliance</td><td className="p-3 text-right">System</td></tr>
-          </tbody>
-        </table>
       </div>
 
-      {/* Preservation Audit Logs */}
-      <div className="bg-white border border-slate-200 rounded-xs overflow-hidden">
-        <div className="px-5 py-3 border-b border-slate-100">
-          <h2 className="text-base font-serif font-bold text-adha-navy">Preservation Event Log</h2>
+      {/* Live Merkle Bitstream Fixity Log Table */}
+      <div className="saas-card overflow-hidden">
+        <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-[#111A2E]/50">
+          <div className="flex items-center gap-2">
+            <Terminal className="w-4 h-4 text-adha-navy dark:text-blue-400" />
+            <h3 className="font-bold text-xs uppercase tracking-wider text-slate-900 dark:text-white">
+              Real-Time SHA-256 Fixity Audit Ledger
+            </h3>
+          </div>
+          <span className="text-[10px] font-mono text-slate-500">
+            Algorithm: FIPS 180-4 SHA-256
+          </span>
         </div>
-        <table className="w-full text-left text-xs border-collapse">
-          <thead>
-            <tr className="bg-slate-50 border-b border-slate-200 font-mono text-[10.5px] text-slate-500 uppercase">
-              <th className="p-2.5">TIMESTAMP</th>
-              <th className="p-2.5">TARGET NODE</th>
-              <th className="p-2.5">OPERATION</th>
-              <th className="p-2.5">SHA-256 CHECKSUM</th>
-              <th className="p-2.5 text-right">STATUS</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-100 font-mono">
-            {[
-              { time: '2024-11-22 03:00:14', node: 'New Delhi Main Node', op: 'Daily Bitrot Scrub', hash: 'a9b2c3d4e5f67890...', status: 'Verified' },
-              { time: '2024-11-21 23:45:00', node: 'Ambedkar Memorial Vault', op: 'Offsite Tape Mirror', hash: 'f8e7d6c5b4a39281...', status: 'Verified' },
-              { time: '2024-11-21 18:20:10', node: 'Columbia Univ Node', op: 'Federation Hash Sync', hash: '1234567890abcdef...', status: 'Verified' },
-            ].map((log, idx) => (
-              <tr key={idx} className="hover:bg-slate-50">
-                <td className="p-2.5 text-slate-600">{log.time}</td>
-                <td className="p-2.5 font-bold text-slate-800">{log.node}</td>
-                <td className="p-2.5 text-slate-700">{log.op}</td>
-                <td className="p-2.5 text-slate-500 text-[10px]">{log.hash}</td>
-                <td className="p-2.5 text-right">
-                  <span className="antd-tag-green">{log.status}</span>
-                </td>
+
+        <div className="overflow-x-auto">
+          <table className="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr className="bg-slate-50 dark:bg-[#111A2E] border-b border-slate-200 dark:border-[#23324E] font-mono text-[10.5px] text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                <th className="p-3.5">TIMESTAMP</th>
+                <th className="p-3.5">STORAGE BLOCK</th>
+                <th className="p-3.5">TARGET FOLIO</th>
+                <th className="p-3.5">COMPUTED SHA-256 DIGEST</th>
+                <th className="p-3.5 text-right">PARITY VERIFICATION</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-mono text-[11px]">
+              {logs.map((log, idx) => (
+                <tr key={idx} className="hover:bg-slate-50/80 dark:hover:bg-[#1A263D]/60 transition-colors">
+                  <td className="p-3.5 text-slate-500 dark:text-slate-400">{log.time}</td>
+                  <td className="p-3.5 font-bold text-slate-800 dark:text-slate-200">{log.block}</td>
+                  <td className="p-3.5 text-slate-700 dark:text-slate-300 truncate max-w-xs">{log.file}</td>
+                  <td className="p-3.5 text-slate-500 dark:text-slate-400">
+                    <code>{log.hash.slice(0, 24)}...</code>
+                  </td>
+                  <td className="p-3.5 text-right">
+                    <span className={`px-2 py-0.5 rounded-full font-bold ${
+                      log.status === 'VALID' 
+                        ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800'
+                        : 'bg-amber-50 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300 border border-amber-200 dark:border-amber-800 animate-pulse'
+                    }`}>
+                      {log.status === 'VALID' ? 'PASS ✓' : 'COMPUTING...'}
+                    </span>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
+
     </div>
   );
 }

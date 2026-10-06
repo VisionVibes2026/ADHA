@@ -3,7 +3,7 @@ import { Settings, Shield, Users } from 'lucide-react';
 
 export default function AdminPlaceholder({ title, description }) {
   return (
-    <div className="bg-white border border-adha-border rounded p-8 shadow-2xs space-y-4 max-w-2xl">
+    <div className="bg-white border border-adha-border rounded p-8 shadow-xs space-y-4 max-w-2xl">
       <div className="flex items-center gap-3 border-b border-slate-100 pb-3">
         <div className="p-2 bg-slate-100 rounded text-adha-navy">
           <Settings className="w-5 h-5" />

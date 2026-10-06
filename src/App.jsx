@@ -15,33 +15,44 @@ import CuratorReviewView from './pages/CuratorReviewView';
 import ConnectedInstitutionsView from './pages/ConnectedInstitutionsView';
 import AnalyticsView from './pages/AnalyticsView';
 import PreservationView from './pages/PreservationView';
-import AdminPlaceholder from './pages/AdminPlaceholder';
+import AdminRegistryView from './pages/AdminRegistryView';
+import SystemSettingsView from './pages/SystemSettingsView';
+import AudiovisualView from './pages/AudiovisualView';
+import KioskView from './pages/KioskView';
+
+import ErrorBoundary from './components/common/ErrorBoundary';
 
 export default function App() {
   return (
-    <ArchiveProvider>
-      <Router>
-        <AppShell>
-          <Routes>
-            <Route path="/" element={<Navigate to="/dashboard" replace />} />
-            <Route path="/dashboard" element={<DashboardView />} />
-            <Route path="/archive" element={<ArchiveView />} />
-            <Route path="/documents/:id" element={<DocumentReaderView />} />
-            <Route path="/ai-search" element={<AISearchView />} />
-            <Route path="/research-assistant" element={<ResearchAssistantView />} />
-            <Route path="/knowledge-graph" element={<KnowledgeGraphView />} />
-            <Route path="/timeline" element={<TimelineView />} />
-            <Route path="/ingestion" element={<IngestionView />} />
-            <Route path="/review" element={<CuratorReviewView />} />
-            <Route path="/institutions" element={<ConnectedInstitutionsView />} />
-            <Route path="/analytics" element={<AnalyticsView />} />
-            <Route path="/preservation" element={<PreservationView />} />
-            <Route path="/users" element={<AdminPlaceholder title="Users & Roles Registry" description="Manage archivist credentials and permissions" />} />
-            <Route path="/settings" element={<AdminPlaceholder title="System Settings" description="Repository parameters, API tokens, and backup schedules" />} />
-            <Route path="*" element={<Navigate to="/dashboard" replace />} />
-          </Routes>
-        </AppShell>
-      </Router>
-    </ArchiveProvider>
+    <ErrorBoundary>
+      <ArchiveProvider>
+        <Router>
+          <AppShell>
+            <ErrorBoundary>
+              <Routes>
+                <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                <Route path="/dashboard" element={<DashboardView />} />
+                <Route path="/archive" element={<ArchiveView />} />
+                <Route path="/documents/:id" element={<DocumentReaderView />} />
+                <Route path="/ai-search" element={<AISearchView />} />
+                <Route path="/research-assistant" element={<ResearchAssistantView />} />
+                <Route path="/knowledge-graph" element={<KnowledgeGraphView />} />
+                <Route path="/timeline" element={<TimelineView />} />
+                <Route path="/audiovisual" element={<AudiovisualView />} />
+                <Route path="/kiosk" element={<KioskView />} />
+                <Route path="/ingestion" element={<IngestionView />} />
+                <Route path="/review" element={<CuratorReviewView />} />
+                <Route path="/institutions" element={<ConnectedInstitutionsView />} />
+                <Route path="/analytics" element={<AnalyticsView />} />
+                <Route path="/preservation" element={<PreservationView />} />
+                <Route path="/users" element={<AdminRegistryView />} />
+                <Route path="/settings" element={<SystemSettingsView />} />
+                <Route path="*" element={<Navigate to="/dashboard" replace />} />
+              </Routes>
+            </ErrorBoundary>
+          </AppShell>
+        </Router>
+      </ArchiveProvider>
+    </ErrorBoundary>
   );
 }

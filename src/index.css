@@ -1,89 +1,155 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --primary: #123B63;
+    --primary-hover: #0e2f50;
+    --secondary: #0F766E;
+    --success: #15803D;
+    --warning: #D97706;
+    --danger: #DC2626;
+    --bg: #F8FAFC;
+    --text: #0F172A;
+    --border: #E2E8F0;
+    color-scheme: light;
+  }
+
+  html.dark, .dark {
+    --bg: #0B1120;
+    --text: #F1F5F9;
+    --border: #23324E;
+    color-scheme: dark;
+  }
+
   body {
-    @apply bg-adha-bg text-adha-text font-sans antialiased text-[13px] leading-normal selection:bg-adha-navy/15 selection:text-adha-navy;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
-  h1, h2, h3, h4 {
-    @apply tracking-tight;
+  h1, h2, h3, h4, h5, h6 {
+    @apply tracking-tight font-semibold text-slate-900 dark:text-white;
   }
 }
 
 @layer components {
-  /* Buttons — no shadows, sharp radii */
+  /* High-Fidelity Enterprise SaaS Cards */
+  .saas-card {
+    @apply bg-white dark:bg-[#151F32] border border-slate-200/90 dark:border-[#23324E] rounded-xl shadow-xs transition-all duration-150;
+  }
+
+  .saas-card-interactive {
+    @apply bg-white dark:bg-[#151F32] border border-slate-200/90 dark:border-[#23324E] rounded-xl shadow-xs transition-all duration-150 hover:border-slate-300 dark:hover:border-blue-500/50 hover:shadow-sm;
+  }
+
+  /* Header Glassmorphism */
+  .glass-header {
+    @apply bg-white/95 dark:bg-[#111A2E]/95 backdrop-blur-md border-b border-slate-200 dark:border-[#23324E];
+  }
+
+  /* Production Pill Badges */
+  .badge-primary {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-50 text-[#123B63] dark:bg-blue-900/30 dark:text-blue-300 border border-blue-200/60 dark:border-blue-800/40;
+  }
+
+  .badge-teal {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-teal-50 text-[#0F766E] dark:bg-teal-900/30 dark:text-teal-300 border border-teal-200/60 dark:border-teal-800/40;
+  }
+
+  .badge-success {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-50 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400 border border-emerald-200/70 dark:border-emerald-800/40;
+  }
+
+  .badge-warning {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-amber-50 text-amber-800 dark:bg-amber-950/40 dark:text-amber-400 border border-amber-200/70 dark:border-amber-800/40;
+  }
+
+  .badge-danger {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-rose-50 text-rose-700 dark:bg-rose-950/40 dark:text-rose-400 border border-rose-200/70 dark:border-rose-800/40;
+  }
+
+  .badge-neutral {
+    @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 border border-slate-200 dark:border-slate-700;
+  }
+
+  /* Form Elements */
+  .ad-input {
+    @apply bg-white dark:bg-[#151F32] border border-slate-200 dark:border-[#23324E] text-slate-900 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-500 rounded-lg text-xs transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500;
+  }
+
+  /* Button Presets */
+  .btn-primary {
+    @apply bg-[#123B63] hover:bg-[#0e2f50] text-white font-medium text-xs rounded-lg px-3.5 py-2 transition-colors duration-150 inline-flex items-center justify-center gap-1.5 shadow-xs select-none;
+  }
+
+  .btn-secondary {
+    @apply bg-white dark:bg-[#151F32] hover:bg-slate-50 dark:hover:bg-[#1A263D] text-slate-700 dark:text-slate-200 font-medium text-xs rounded-lg px-3.5 py-2 border border-slate-200 dark:border-[#23324E] transition-colors duration-150 inline-flex items-center justify-center gap-1.5 shadow-xs select-none;
+  }
+
+  /* Backward compatible aliases */
   .antd-btn-primary {
-    @apply bg-adha-navy hover:bg-adha-navy-dark text-white font-semibold px-3 py-1.5 rounded-xs border border-adha-navy transition-colors duration-150 inline-flex items-center justify-center gap-1.5 text-xs select-none;
+    @apply bg-adha-navy hover:bg-adha-navy-dark text-white font-medium px-3.5 py-1.5 rounded-lg border border-adha-navy transition-colors duration-150 inline-flex items-center justify-center gap-1.5 text-xs select-none;
   }
 
   .antd-btn-default {
-    @apply bg-white hover:bg-slate-50 text-slate-700 font-semibold px-3 py-1.5 rounded-xs border border-slate-300 transition-colors duration-150 inline-flex items-center justify-center gap-1.5 text-xs select-none;
+    @apply bg-white dark:bg-[#151F32] hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 font-medium px-3.5 py-1.5 rounded-lg border border-slate-300 dark:border-slate-700 transition-colors duration-150 inline-flex items-center justify-center gap-1.5 text-xs select-none;
   }
 
-  .antd-btn-dashed {
-    @apply bg-white hover:bg-slate-50 text-slate-700 font-semibold px-3 py-1.5 rounded-xs border border-dashed border-slate-400 transition-colors duration-150 inline-flex items-center justify-center gap-1.5 text-xs select-none;
-  }
-
-  .antd-btn-teal {
-    @apply bg-adha-teal hover:bg-adha-teal-light text-white font-semibold px-3 py-1.5 rounded-xs border border-adha-teal transition-colors duration-150 inline-flex items-center justify-center gap-1.5 text-xs select-none;
-  }
-
-  /* Tags & Badges */
   .antd-tag {
-    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-xs text-[11px] font-mono font-medium border border-slate-200 bg-slate-100 text-slate-700 select-none;
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-mono font-medium border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 select-none;
   }
 
   .antd-tag-green {
-    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-xs text-[11px] font-mono font-semibold border border-emerald-300 bg-emerald-50 text-emerald-800 select-none;
-  }
-
-  .antd-tag-blue {
-    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-xs text-[11px] font-mono font-semibold border border-blue-300 bg-blue-50 text-blue-800 select-none;
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-mono font-medium border border-emerald-300/60 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-800 dark:text-emerald-300 select-none;
   }
 
   .antd-tag-orange {
-    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-xs text-[11px] font-mono font-semibold border border-amber-300 bg-amber-50 text-amber-900 select-none;
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-mono font-medium border border-amber-300/60 bg-amber-50 dark:bg-amber-950/40 text-amber-900 dark:text-amber-300 select-none;
   }
 
-  .antd-tag-red {
-    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-xs text-[11px] font-mono font-semibold border border-red-300 bg-red-50 text-red-800 select-none;
-  }
-
-  .antd-tag-navy {
-    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-xs text-[11px] font-mono font-semibold border border-adha-navy/40 bg-adha-navy/10 text-adha-navy select-none;
-  }
-
-  /* Cards — border only, no shadow */
   .antd-card {
-    @apply bg-white border border-slate-200 rounded-xs p-5;
+    @apply bg-white dark:bg-[#151F32] border border-slate-200 dark:border-[#23324E] rounded-xl p-5 shadow-xs;
   }
 
   .antd-card-head {
-    @apply border-b border-slate-100 pb-3 mb-4 flex items-center justify-between;
+    @apply border-b border-slate-100 dark:border-slate-800 pb-3 mb-4 flex items-center justify-between;
   }
 }
 
-/* Custom Scrollbar for dense institutional UI */
+/* Custom 6px ultra-thin scrollbar */
 ::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F1F5F9;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
   background: #CBD5E1;
-  border-radius: 2px;
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
 }
 
 ::-webkit-scrollbar-thumb:hover {
   background: #94A3B8;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #475569;
 }
 
 /* Archival Scan Canvas Effect */
