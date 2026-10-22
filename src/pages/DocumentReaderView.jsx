@@ -958,54 +958,62 @@ export default function DocumentReaderView() {
             </div>
 
             {/* HERITAGE GRAPH */}
-            <div className="pt-3 border-t border-slate-200 dark:border-[#23324E] space-y-3">
-              <div className="flex justify-between items-center">
-                <p className="text-[10px] font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <GitFork className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400" /> HERITAGE GRAPH
-                </p>
-                <Link to="/knowledge-graph" className="text-[10px] font-mono text-[#0F766E] dark:text-teal-400 hover:underline font-bold">
-                  View Node →
-                </Link>
-              </div>
+            {doc.heritageGraph && (
+              <div className="pt-3 border-t border-slate-200 dark:border-[#23324E] space-y-3">
+                <div className="flex justify-between items-center">
+                  <p className="text-[10px] font-mono font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                    <GitFork className="w-3.5 h-3.5 text-[#0F766E] dark:text-teal-400" /> HERITAGE GRAPH
+                  </p>
+                  <Link to="/knowledge-graph" className="text-[10px] font-mono text-[#0F766E] dark:text-teal-400 hover:underline font-bold">
+                    View Node →
+                  </Link>
+                </div>
 
-              {/* Interlinked Speeches */}
-              <div>
-                <p className="text-[10.5px] font-mono text-slate-500 dark:text-slate-400 mb-1.5">INTERLINKED HISTORICAL SPEECHES</p>
-                <div className="space-y-1.5">
-                  {doc.heritageGraph.interlinkedSpeeches.map((sp, idx) => (
-                    <div key={idx} className="p-2.5 bg-slate-50 dark:bg-[#111A2E] rounded-xl border border-slate-200 dark:border-[#23324E] text-xs">
-                      <p className="font-serif font-bold text-slate-900 dark:text-white leading-tight">{sp.title}</p>
-                      <p className="text-[10px] font-mono text-slate-500 dark:text-slate-400 mt-0.5">{sp.date} • {sp.context}</p>
+                {/* Interlinked Speeches */}
+                {doc.heritageGraph.interlinkedSpeeches?.length > 0 && (
+                  <div>
+                    <p className="text-[10.5px] font-mono text-slate-500 dark:text-slate-400 mb-1.5">INTERLINKED HISTORICAL SPEECHES</p>
+                    <div className="space-y-1.5">
+                      {doc.heritageGraph.interlinkedSpeeches.map((sp, idx) => (
+                        <div key={idx} className="p-2.5 bg-slate-50 dark:bg-[#111A2E] rounded-xl border border-slate-200 dark:border-[#23324E] text-xs">
+                          <p className="font-serif font-bold text-slate-900 dark:text-white leading-tight">{sp.title}</p>
+                          <p className="text-[10px] font-mono text-slate-500 dark:text-slate-400 mt-0.5">{sp.date} • {sp.context}</p>
+                        </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </div>
+                  </div>
+                )}
 
-              {/* Contemporary Figures */}
-              <div>
-                <p className="text-[10.5px] font-mono text-slate-500 dark:text-slate-400 mb-1.5">CONTEMPORANEOUS FIGURES & EDITORS</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {doc.heritageGraph.contemporaryFigures.map((fig, idx) => (
-                    <span key={idx} className="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-[10.5px] font-semibold px-2.5 py-0.5 rounded-lg border border-slate-200 dark:border-slate-700">
-                      {fig}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Custodial Repositories */}
-              <div>
-                <p className="text-[10.5px] font-mono text-slate-500 dark:text-slate-400 mb-1.5">CUSTODIAL REPOSITORIES</p>
-                <div className="space-y-1.5 text-xs">
-                  {doc.heritageGraph.custodialRepositories.map((repo, idx) => (
-                    <div key={idx} className="p-2.5 bg-slate-50 dark:bg-[#111A2E] rounded-xl border border-slate-200 dark:border-[#23324E]">
-                      <p className="font-bold text-slate-800 dark:text-slate-200">{repo.name}</p>
-                      <p className="text-[10px] font-mono text-slate-500 dark:text-slate-400">{repo.identifier}</p>
+                {/* Contemporary Figures */}
+                {doc.heritageGraph.contemporaryFigures?.length > 0 && (
+                  <div>
+                    <p className="text-[10.5px] font-mono text-slate-500 dark:text-slate-400 mb-1.5">CONTEMPORANEOUS FIGURES & EDITORS</p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {doc.heritageGraph.contemporaryFigures.map((fig, idx) => (
+                        <span key={idx} className="bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 text-[10.5px] font-semibold px-2.5 py-0.5 rounded-lg border border-slate-200 dark:border-slate-700">
+                          {fig}
+                        </span>
+                      ))}
                     </div>
-                  ))}
-                </div>
+                  </div>
+                )}
+
+                {/* Custodial Repositories */}
+                {doc.heritageGraph.custodialRepositories?.length > 0 && (
+                  <div>
+                    <p className="text-[10.5px] font-mono text-slate-500 dark:text-slate-400 mb-1.5">CUSTODIAL REPOSITORIES</p>
+                    <div className="space-y-1.5 text-xs">
+                      {doc.heritageGraph.custodialRepositories.map((repo, idx) => (
+                        <div key={idx} className="p-2.5 bg-slate-50 dark:bg-[#111A2E] rounded-xl border border-slate-200 dark:border-[#23324E]">
+                          <p className="font-bold text-slate-800 dark:text-slate-200">{repo.name}</p>
+                          <p className="text-[10px] font-mono text-slate-500 dark:text-slate-400">{repo.identifier}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
+            )}
           </div>
 
           {/* National Archives Permanent DOI Footer */}
